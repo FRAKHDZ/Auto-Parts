@@ -7,8 +7,14 @@
 
 <?php
 $url = 'http://blitz.cs.niu.edu/CreditCard/';
-$data = array('cc' => '6011 1234 4321 1234', 'name' => 'John Doe', 'exp' => '12/2017', 'amount' => '654.32');
-
+$data = array(
+    'vendor' => 'VE001-99',
+    'trans' => '907-987654321-296',
+    'cc' => '6011 1234 4321 1234',
+    'name' => 'John Doe', 
+    'exp' => '12/2024', 
+    'amount' => '654.32');
+    
 $options = array(
     'http' => array(
         'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
