@@ -26,7 +26,9 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo "Product: " . $row["description"] . "<br>" . "Price: $" . $row["price"]. "<br><br>";
+      while($row = $result->fetch_assoc()) {
+        echo "Product: " . $row["description"] . "<br>" . "Price: $" . $row["price"].
+        "<br><br>" . "<form action= ". '"' . '/Auto-Parts/Auto-Parts/checkout.html">' . '<input type="submit" value="Buy">' . '</form>';
   }
 } else {
   echo "0 results";
