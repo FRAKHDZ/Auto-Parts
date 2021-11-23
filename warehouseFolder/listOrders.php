@@ -31,11 +31,12 @@ if ($result->num_rows > 0) {
 	// print header
 	Print "<table border>"; 
 	Print "<tr>"; 
-	Print "<th>authNum</th><th>name</th><th>email</th><th>shippingAddress</th><th>orderStatus</th>";
+	Print "<th>authNum</th><th>date</th><th>name</th><th>email</th><th>shippingAddress</th><th>orderStatus</th>";
 	Print "</tr>";
 	while($row = $result->fetch_assoc()) { 
 		Print "<tr>"; 
-		Print "<td>".$row['authNum'] . "</td> "; 
+		Print "<td>".$row['authNum'] . "</td> ";
+		Print "<td>".$row['date'] . "</td> "; 
 		Print "<td>".$row['name'] . " </td>"; 
 		Print "<td>".$row['email'] . " </td>"; 
 		Print "<td>".$row['shippingAddress'] . " </td>"; 
