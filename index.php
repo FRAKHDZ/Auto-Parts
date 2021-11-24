@@ -26,20 +26,16 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-      while($row = $result->fetch_assoc()) {
-        echo "Product: " . $row["description"] . "<br>" . "Price: $" . $row["price"].
-        "<br><br>" . "<form action= ". '"' . '/Auto-Parts/Auto-Parts/checkout.html">' . '<input type="submit" value="Buy">' . '</form>';
+	echo "Product: " . $row["description"] . "<br>" . "Price: $" . $row["price"]. 
+	"<br><br>" . "<form action= ". '"' . '/Auto-Parts/Auto-Parts/checkout.php">' 
+	. '<input type="hidden" id="num" name="num" value="' . $row["number"] . '">' . 
+	'<input type="submit" value="Buy">' . '</form>';
   }
 } else {
   echo "0 results";
 }
 $conn->close();
 ?>
-<form action="/Auto-Parts/Auto-Parts/checkout.html">
-  <input type="checkbox" id="numID" name="numID" value="1">
-  <label for="numID"> windshield w/ polymer</label><br>
-  <input type="submit" value="Buy">
-</form> 
 
 </body>
 </html>
