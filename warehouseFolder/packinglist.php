@@ -121,21 +121,15 @@ if ($numR > 0) {
 	Print "0 records found";
 }
 
+
+
+
+
+
 // add buttons to print packing list, invoice, and shipping address.
-echo "<form action='/warehouseFolder/packinglist.php' method='post'>";
-	//submit button ffor packing list
-	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
-	echo "<input type='submit' value='Submit'> <br>";
-echo "</form>";
+
+
+
 
 
 ?>
-
-
-
-
-
-
-
-
-

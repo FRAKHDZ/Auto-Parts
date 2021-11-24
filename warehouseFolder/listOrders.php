@@ -5,6 +5,8 @@
 </head>
 <body>	
 <h3>Parts Database Content</h3>
+
+<form action='/warehouseFolder/partsOrdered.php' method='post'>
 <?php 
 
 $servername = "localhost";
@@ -25,22 +27,26 @@ echo "Connected successfully to: " . $servername;
 $conn->set_charset("utf8");
 
 // Collects data from "parts" table 
-$sql = "SELECT * FROM customerorder";
+$sql = "SELECT * FROM customerorder WHERE orderStatus='n' ORDER BY date";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// print header
+	Print "<h1>Choose a order to start packing</h1><br>";
 	Print "<table border>"; 
 	Print "<tr>"; 
-	Print "<th>authNum</th><th>date</th><th>name</th><th>email</th><th>shippingAddress</th><th>orderStatus</th>";
+	Print "<th>Order to pack</th><th>authNum</th><th>date</th><th>name</th><th>email</th><th>shippingAddress</th>";
 	Print "</tr>";
+	//	loop til all orders are printed
 	while($row = $result->fetch_assoc()) { 
+		// add a radio button to replace the text box 
 		Print "<tr>"; 
-		Print "<td>".$row['authNum'] . "</td> ";
-		Print "<td>".$row['date'] . "</td> "; 
-		Print "<td>".$row['name'] . " </td>"; 
-		Print "<td>".$row['email'] . " </td>"; 
-		Print "<td>".$row['shippingAddress'] . " </td>"; 
-		Print "<td>".$row['orderStatus'] . " </td></tr>"; 
+		Print "<td><input type='radio' name='authNumPass' value='".$row['authNum']."'> </td>";
+		Print "<td>".$row['authNum']."</td>";
+		Print "<td>".$row['date']."</td>"; 
+		Print "<td>".$row['name']." </td>"; 
+		Print "<td>".$row['email']." </td>"; 
+		Print "<td>".$row['shippingAddress'] . " </td>";  
+		Print "</tr>";
 	} 
 	Print "</table>"; 
 } else {
@@ -50,9 +56,6 @@ $conn->close();
 
 ?> 
 
-<form action="/warehouseFolder/partsOrdered.php" method="post">
-	<label>authNum:</label> <br>
-    <input type="text" name="authNumPass" value="12345" /> <br>
     <input type="submit" value="Submit">
 </form>
 
