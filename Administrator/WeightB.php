@@ -17,8 +17,8 @@
     <title>Weight Bracket</title>
 </head>
 <body>
-    <a href="Admin.php">Admin</a>
-    <a href="Order.php">Order</a>
+    <a href="Admin.php">Administrator Page</a>
+    <a href="Order.php">Order Page</a>
     <h1>Weight Bracket</h1>
 
     <table class="table table-success table-striped">
@@ -48,5 +48,6 @@
     </table>
 
     <a href="WeightControl.php" class="btn btn-success">Create Weight Bracket</a>
+    <br>
 </body>
 </html>

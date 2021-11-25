@@ -9,9 +9,9 @@
     <title>Admin Main Page</title>
 </head>
 <body>
-    <a href="Order.php">Order</a>
-    <a href="WeightB.php">Weight Bracket</a>
-
     <h1>Admin</h1>
+    <a href="Order.php">Order</a>
+    <br>
+    <a href="WeightB.php">Weight Bracket</a>
 </body>
 </html>
