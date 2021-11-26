@@ -12,7 +12,7 @@ $conn = new mysqli($servername, $username, $password, $dbname) or die("unable to
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-echo "Connected successfully to: " . $servername."<br><br>";
+//echo "Connected successfully to: " . $servername."<br><br>";
 
 /* change character set to utf8 */
 $conn->set_charset("utf8");
@@ -52,7 +52,7 @@ $conn = new mysqli($servername, $username, $password, $dbname) or die("unable to
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-echo "Connected successfully to: " . $servername."<br><br>";
+//echo "Connected successfully to: " . $servername."<br><br>";
 
 /* change character set to utf8 */
 $conn->set_charset("utf8");
@@ -62,7 +62,7 @@ $counter = 0;
 while ($counter < $numR) {
 	// make a sql query that gets the description and weight of each part in data array
 	//echo $data[$counter]['number'];
-	$sql = "SELECT description, weight FROM parts WHERE number=".$data[$counter]['number']." LIMIT 1";
+	$sql = "SELECT description, weight FROM parts WHERE number=".$data[$counter]['number']." LIMIT 1";  //Maybe add pictures
 	//$result = $conn->prepare($sql);
 	//$result->execute;
 	$result = $conn->query($sql) or die($conn->error);
@@ -80,7 +80,7 @@ $conn->close();
 
 
 // print opening message
-echo "Packing list for order ".$_POST["authNumPass"];
+echo "<h1>Packing list for order ".$_POST["authNumPass"]."</h1>";
 // Lets print the table to the screen.
 // zero out counter again
 $counter = 0;

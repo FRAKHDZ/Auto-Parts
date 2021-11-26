@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>CSCI467/567 Access to Legacy Database Test Page</title>
+<title>Warehouse Interface</title>
 </head>
 <body>	
-<h3>Parts Database Content</h3>
 
 <form action='/warehouseFolder/partsOrdered.php' method='post'>
 <?php 
