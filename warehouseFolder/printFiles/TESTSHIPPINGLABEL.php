@@ -47,7 +47,7 @@ echo $custInfo['shippingAddress']."<br>";
 echo "</h4>";
 
 
-/*  This is done in list orders now.
+/*
 //update the customerOrder table
 $sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE authNum = ".$_POST["authNumPass"];
 
@@ -55,7 +55,6 @@ if ($conn->query($sql) === FALSE) {
     echo "Error updating record: " . $conn->error;
 } 
 */
-
 
 $conn->close();  // Disconnect from auto-parts database on localhost
 ?>

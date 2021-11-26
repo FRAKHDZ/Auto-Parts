@@ -19,7 +19,7 @@ $conn = new mysqli($servername, $username, $password, $dbname) or die("unable to
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-echo "Connected successfully to: " . $servername."<br><br>";
+//echo "Connected successfully to: " . $servername."<br><br>";
 
 /* change character set to utf8 */
 $conn->set_charset("utf8");
@@ -43,7 +43,23 @@ if ($result->num_rows > 0) {
 } else {
 	Print "0 records found";
 }
-$conn->close();
+
+
+//Check if date is in post
+if (isset($_POST['date'])) {
+	//if yes then update the customerOrder table
+	$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE authNum = ".$_POST["authNumPass"];
+
+	if ($conn->query($sql) === FALSE) {
+    	echo "Error updating record: " . $conn->error;
+	} 
+}
+
+$conn->close(); // disconnect from auto-parts on localhost
+
+
+
+
 
 
 $servername = "blitz.cs.niu.edu";
@@ -59,7 +75,7 @@ $conn = new mysqli($servername, $username, $password, $dbname) or die("unable to
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-echo "Connected successfully to: " . $servername."<br><br>";
+//echo "Connected successfully to: " . $servername."<br><br>";
 
 /* change character set to utf8 */
 $conn->set_charset("utf8");
@@ -128,6 +144,19 @@ if ($numR > 0) {
 	Print "0 records found";
 }
 
+if (isset($_POST['date'])) {
+	echo "Shipped on ".$_POST['date'];
+} else {
+	// add buttons to print shipping label.
+	echo "<form action='' method='post'>";
+		echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
+		//submit button for packing list
+		echo "Date shipped: <input type='text' name='date' id='date' value='YYYY-MM-DD'> <br>";
+		echo "<input type='submit' value='Mark order as Shipped'> <br>";
+	echo "</form>";
+
+}
+
 echo "<br><h2>Select what you would like to print:</h2>";
 
 // add buttons to print packing list.
@@ -146,14 +175,16 @@ echo "<form action='/warehouseFolder/printFiles/printInvoice.php' method='post'>
 echo "</form>";
 
 // add buttons to print shipping label.
-echo "<form action='/warehouseFolder/printFiles/printShippingLabel.php' method='post'>";
+echo "<form action='/warehouseFolder/printFiles/TESTSHIPPINGLABEL.php' method='post'>";
 	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
 	//submit button for packing list
 	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'> <br>";
-	echo "<input type='submit' value='Shipping Label and Mark Order as complete'> <br>";
+	echo "<input type='submit' value='Shipping Label'> <br>";
 echo "</form>";
 
 ?>
+
+
 
 </body>
 </html>

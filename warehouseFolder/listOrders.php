@@ -20,13 +20,13 @@ $conn = new mysqli($servername, $username, $password, $dbname) or die("unable to
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-echo "Connected successfully to: " . $servername;
+//echo "Connected successfully to: " . $servername;
 
 /* change character set to utf8 */
 $conn->set_charset("utf8");
 
 // Collects data from "parts" table 
-$sql = "SELECT * FROM customerorder WHERE orderStatus='n' ORDER BY date";
+$sql = "SELECT * FROM customerorder WHERE dateShipped IS NULL ORDER BY date";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// print header
