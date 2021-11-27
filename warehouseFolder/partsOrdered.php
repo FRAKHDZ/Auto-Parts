@@ -103,7 +103,7 @@ $conn->close();
 
 
 // print opening message
-echo "<h1>Packing list for order ".$_POST["authNumPass"]."</h1>";
+echo "<h1>Parts in order ".$_POST["authNumPass"]."</h1>";
 // Lets print the table to the screen.
 // zero out counter again
 $counter = 0;
@@ -151,7 +151,7 @@ if (isset($_POST['date'])) {
 	echo "<form action='' method='post'>";
 		echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
 		//submit button for packing list
-		echo "Date shipped: <input type='text' name='date' id='date' value='YYYY-MM-DD'> <br>";
+		echo "Date shipped: <input type='text' name='date' id='date' value='".date("Y/m/d")."'> <br>";
 		echo "<input type='submit' value='Mark order as Shipped'> <br>";
 	echo "</form>";
 
@@ -164,21 +164,24 @@ echo "<form action='/warehouseFolder/printFiles/packinglist.php' method='post'>"
 	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
 	//submit button for packing list
 	echo "<input type='submit' value='Packing List'> <br>";
-echo "</form>";
+echo "</form><br>";
 
 // add buttons to print invoice.
 echo "<form action='/warehouseFolder/printFiles/printInvoice.php' method='post'>";
-	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
-	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'> <br>";
+	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'>";
+	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'>";
+	if (isset($_POST['date'])) {
+		echo "<input type='hidden' name='shipDate' id='shipDate' value='".$_POST['date']."'>";
+	}
 	//submit button for packing list
-	echo "<input type='submit' value='Invoice'> <br>";
+	echo "<input type='submit' value='Invoice'>";
 echo "</form>";
 
 // add buttons to print shipping label.
-echo "<form action='/warehouseFolder/printFiles/TESTSHIPPINGLABEL.php' method='post'>";
+echo "<form action='/warehouseFolder/printFiles/printShippingLabel.php' method='post'>";
 	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
 	//submit button for packing list
-	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'> <br>";
+	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'>";
 	echo "<input type='submit' value='Shipping Label'> <br>";
 echo "</form>";
 

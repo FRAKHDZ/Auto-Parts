@@ -133,9 +133,18 @@ $conn->close(); // Disconnect from blitz.cs.niu.edu
 echo "<h1>Invoice</h1>";
 // print our company info
 echo "<h3>Order number: ".$_POST["authNumPass"];
-echo "<br>Order Date".$custDate."</h3><br>";
+echo "<br>Order Date: ".$custDate;
+echo "<br>Shipped on: ";
+if (isset($_POST['shipDate']))
+{
+    echo $_POST['shipDate'];
+} else 
+{
+    echo "N/A";
+}
+echo "</h3><br>";
 echo "<h3>Warehouse information:</h3>";
-echo "<h4>Company Name<br>Company address<br>etc.";
+echo "<h4>5A Corporation<br>5A Street, Dekalb<br>etc.";
 echo "</h4><br>";
 // print customer into
 echo "<h3>Ship to:</h3>";
