@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap');
 body {
 	background-color: #333;	
+
 }
+
 img {
 	float: left;
 	height: 500px;
+	padding-right: 30px;
 }
 
 .btn {
@@ -61,6 +66,9 @@ h3 {
 	color: white;
 	float: center;
 	height: 500px;
+	padding-left: 30px;
+	font-size: 30px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 hr.productHR {
@@ -85,12 +93,14 @@ hr.titleHR {
 h1.title {
 	list-style-type: none;
 	margin: 0;
-	padding: 0;
+	padding-top: 30px;
 	overflow: hidden;
 	background-color: #333;
 	color: white;
 	position: static;	
 	width: 100%;
+	font-family: 'Lobster', cursive;
+	font-size: 60px;
 }
 
 ul.topnav {
@@ -104,7 +114,10 @@ ul.topnav {
 	width: 100%;
 }
 
-ul.topnav li {float: left;}
+ul.topnav li {i
+	font-size: 30px;
+	float: left;
+}
 
 ul li a{
 	display: block;
@@ -112,6 +125,8 @@ ul li a{
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+	font-size: 30px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 ul.topnav li a:hover:not(.active) {background-color: #111;}

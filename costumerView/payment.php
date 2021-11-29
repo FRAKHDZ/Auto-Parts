@@ -1,23 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
-</head>
-<body>
-
-<h1>Check out</h1>
-<p>This is a paragraph.</p>
-
-<form action="/Auto-Parts/Auto-Parts/proc.php" metod="post">
-	<label for="CardNum">Card: </label>
-	<input type="text" id="CardNum" name="CardNum" value="6011 1234 4321 1234"><br>
-	<label for="name">Name on Card:</label><br>
-	<input type="text" id="name" name="name" value="John Doe"><br>
-	<label for="exp">Expiration Date:</label><br>
-	<input type="text" id="exp" name="exp" value="12/2024"><br>
-	<label for="email">Email:</label><br><!DOCTYPE html>
-<html>
-<head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page Title</title>
@@ -66,9 +49,9 @@ $result = $conn->query($sql);
 $total = 0.00;
 if ($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {
-		echo "Product: " . $row["description"] . "Quantity: " . $row["quantity"] .
+		/*echo "Product: " . $row["description"] . "Quantity: " . $row["quantity"] .
 		" Price: " . $row["price"] .  " Total: " . $row["quantity"] * $row["price"] . "<br></br>";
-		$total = ($row["quantity"] * $row["price"]) + $total;
+		 */$total = ($row["quantity"] * $row["price"]) + $total;
 	}
 }
 echo "Total: " . $total . "<br></br>";
@@ -79,15 +62,6 @@ echo '<input type="hidden" id="total" name="total" value="' . $total . '">
 </form>'	
 
 ?></h3>
-</body>
-</html>
-
-
-
-
-	<input type="text" id="email" name="email" value="z1234@niu.edu"><br>
-  	<input type="submit" value="Purchase">
-</form> 
 
 </body>
 </html>
