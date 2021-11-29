@@ -1,0 +1,126 @@
+
+body {
+	background-color: #333;	
+}
+img {
+	float: left;
+	height: 500px;
+}
+
+.btn {
+	background-color: #aa0023;
+	border: 4px solid #27272d;
+	color: white;
+	padding: 16px 32px;
+	text-decoration: none;
+	margin: 20px 8px;
+	cursor: pointer;
+	box-sizing: border-round;
+	border-radius: 12px;
+}
+
+.btn:hover {	
+	background-color: #87041e;
+	color: #0f0e0e;
+}
+
+.btnProduct {
+	background-color: #aa0023;
+	border: 4px solid #27272d;
+	color: white;
+	padding: 16px 32px;
+	text-decoration: none;
+	margin: 20px 8px;
+	cursor: pointer;
+	box-sizing: border-round;
+	border-radius: 12px;
+	float: right;	
+}
+
+.btnProduct:hover {
+	background-color: #87041e;
+	color: #0f0e0e;
+}
+input:focus[type=text] {
+	color: #dbc9c9;
+	background-color: #565656;
+}
+
+input[type=text] {
+	
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-round;
+	border: 4px solid #0c0c0c;
+	background-color: #4c4c4c;
+	color: #bcb8b8;
+	border-radius: 7px;
+}
+
+h3 {
+	color: white;
+	float: center;
+	height: 500px;
+}
+
+hr.productHR {
+	height: 1px;
+	border-width: 0;
+	background-color: #6b6a6a;
+	width: 95%;
+	text-algin: center;
+	margin-center: 0;
+}
+
+hr.titleHR {
+	height: 4px;
+	border-width: 0;
+	background-color: #aa0023;
+	width: 20%;
+	text-algin: left;
+	margin-left: 0;
+	font-family: "Audiowide", sans-serif;
+}
+
+h1.title {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	color: white;
+	position: static;	
+	width: 100%;
+}
+
+ul.topnav {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+ul.topnav li {float: left;}
+
+ul li a{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnave li a.active {background-color: #ffffff;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+	ul.topnav li.right,
+	ul.topnav li {float: none;}
+}
