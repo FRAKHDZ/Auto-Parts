@@ -39,21 +39,55 @@ echo "<input type='submit'>";
 
 echo "</form>";
 
-//Increments the database by the amount set
-$sql = "UPDATE inventory SET quantity = quantity + '".$_POST["quantity"]."' WHERE number = ".$_POST["number"];
+//echo $_POST['description'];
 
-if ($conn->query($sql) === TRUE) {
-    echo "Record updated successfully";
-  } else {
-    echo "Error updating record: " . $conn->error;
+$rNum = 0;
+//Increments the database by the amount set
+if (isset($_POST['number'])) {
+  $sql = "UPDATE inventory SET quantity = quantity + '".$_POST["quantity"]."' WHERE number = ".$_POST["number"];
+  $conn->query($sql) or die($conn->error);
+  $rNum = 1;
+}
+//elseif (isset($_POST['description'])) {
+ // $sql = "UPDATE inventory SET quantity = quantity + '".$_POST["quantity"]."' WHERE description = ".$_POST["description"];
+//  $conn->query($sql) or die($conn->error);
+//  $rNum = 2;
+//}
+else {
+  echo "<br> Invalid Number and Description";
 }
 
-echo "<br>";
-echo $_POST['number'];
-echo " updated by ";
-echo $_POST['quantity'];
-echo "! <br>";
 
+//if ($conn->query($sql) === TRUE) {
+//    echo "Record updated successfully";
+//  } else {
+//    echo "Error updating record: " . $conn->error;
+//}
+
+$conn->close();
+
+if($rNum == 1){
+  echo "<br> Item Number ";
+  echo $_POST['number'];
+  echo " updated by ";
+  echo $_POST['quantity'];
+  echo "! <br>";
+}
+if($rNum == 2){
+  echo "<br>";
+  echo $_POST['description'];
+  echo " updated by ";
+  echo $_POST['quantity'];
+  echo "! <br>";
+}
+
+unset($_POST['number']);
+unset($_POST['description']);
+unset($_POST['quantity']);
+unset($responseNum);
+
+//echo "<br> The new value of description is ";
+//echo $_POST["description"];
 
 ?>
 
