@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<?php<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -73,7 +73,7 @@ else {
 </h3>
 </body>
 </html>
-
+<?php
 $url = 'http://blitz.cs.niu.edu/CreditCard/';
 $data = array(
 	'vendor' => 'VE001-99',
