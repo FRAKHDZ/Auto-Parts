@@ -43,19 +43,48 @@ echo "</form>";
 
 $rNum = 0;
 //Increments the database by the amount set
-if (isset($_POST['number'])) {
-  $sql = "UPDATE inventory SET quantity = quantity + '".$_POST["quantity"]."' WHERE number = ".$_POST["number"];
-  $conn->query($sql) or die($conn->error);
+
+/*
+echo "<br>";
+echo $_POST['number'];
+echo "<br>";
+echo $_POST['description'];
+echo "<br>";
+echo $_POST['quantity'];
+*/
+
+$num = $_POST['number'];
+$dsc = $_POST['description'];
+$qnt = $_POST['quantity'];
+
+echo "<br> $dsc";
+
+
+if ($num != NULL) {
+  $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE number = $num";
   $rNum = 1;
 }
-//elseif (isset($_POST['description'])) {
- // $sql = "UPDATE inventory SET quantity = quantity + '".$_POST["quantity"]."' WHERE description = ".$_POST["description"];
-//  $conn->query($sql) or die($conn->error);
-//  $rNum = 2;
-//}
-else {
-  echo "<br> Invalid Number and Description";
+
+if ($dsc != NULL) {
+  $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE description = '$dsc'";
+  $rNum = 2;
 }
+$conn->query($sql) or die($conn->error);
+
+//$sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE description = '$dsc'";
+
+
+//else {
+//  echo "<br> Invalid Number and Description";
+//}
+
+
+//Correct Code for string, I guess.
+//$descBoy = "Wrench";
+//$sql = "UPDATE inventory SET quantity = 500 WHERE description = '$descBoy'";
+//$conn->query($sql) or die($conn->error);
+
+//This worked: UPDATE `inventory` SET `quantity`=200 WHERE `description`="Wrench"
 
 
 //if ($conn->query($sql) === TRUE) {
@@ -63,8 +92,6 @@ else {
 //  } else {
 //    echo "Error updating record: " . $conn->error;
 //}
-
-$conn->close();
 
 if($rNum == 1){
   echo "<br> Item Number ";
@@ -81,10 +108,15 @@ if($rNum == 2){
   echo "! <br>";
 }
 
+unset($num);
+unset($dsc);
+unset($qnt);
 unset($_POST['number']);
 unset($_POST['description']);
 unset($_POST['quantity']);
-unset($responseNum);
+unset($rNum);
+
+$conn->close();
 
 //echo "<br> The new value of description is ";
 //echo $_POST["description"];
