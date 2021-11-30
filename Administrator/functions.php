@@ -1,15 +1,31 @@
 <?php
-getPrice(int $transNum)
-{
 
-
+    getOrderTotal(int $id)
+    {
+        // Set connection info and connect to auto-parts database
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "auto-parts";
+        
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname) or die("unable to connect");
+        
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+        //echo "Connected successfully to: " . $servername;
+        
+        /* change character set to utf8 */
+        $conn->set_charset("utf8");
 
 
         //Get part numbers from partsOrdered table in auto-parts database
         // zero out counter
         $counter = 0;
         // Collects data from "parts" table 
-        $sql = "SELECT number, quant FROM partsordered WHERE authNum=".$transNum;
+        $sql = "SELECT number, quant FROM partsordered WHERE authNum=".$id;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // assign the number of rows to numR
@@ -27,6 +43,27 @@ getPrice(int $transNum)
         }
         //now we have a array $data[index] = (number, quantity)
 
+
+        // Collects data from "parts" table 
+        $sql = "SELECT Weight, Price FROM shippingbrackets ORDER BY Weight ASC";
+        $result = $conn->query($sql);
+        // assign weight bracket values to the from and to values.
+        // also set priceShipping
+        if ($result->num_rows > 0) {
+            // To get the bottom of the weight bracket:
+            // Loop through result while theres still data in result
+            // AND while shipping weight (passed from POST) is greater than than the weight of current bracket.
+            while($row = $result->fetch_assoc() and ($_POST["shippingWeight"] > $row['Weight'])) { 
+                $shipping = 0;
+            }
+
+            // This row will also hold how much will be charged for shipping
+            $shipping = $row['Price'];     // Assign this price to the shipping value
+
+        } else {
+            Print "0 records found";
+        }
+        $conn->close(); // disconnect from localhost auto-parts database
 
 
 
@@ -76,8 +113,12 @@ getPrice(int $transNum)
             $total = $data[$counter]['price'] * $data[$counter]['quant'];
             $orderTotal = $orderTotal + $total
         }
+
+        // also need to add shipping
+        $orderTotal = $orderTotal + $shipping
         
 
         return $orderTotal;
     }
+
 ?>
