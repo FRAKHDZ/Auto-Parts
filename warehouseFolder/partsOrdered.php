@@ -160,14 +160,14 @@ if (isset($_POST['date'])) {
 echo "<br><h2>Select what you would like to print:</h2>";
 
 // add buttons to print packing list.
-echo "<form action='/warehouseFolder/printFiles/packinglist.php' method='post'>";
+echo "<form action='/auto-parts/warehouseFolder/printFiles/packinglist.php' method='post'>";
 	echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'> <br>";
 	//submit button for packing list
 	echo "<input type='submit' value='Packing List'> <br>";
 echo "</form><br>";
 
 // add buttons to print invoice.
-echo "<form action='/warehouseFolder/printFiles/printInvoice.php' method='post'>";
+echo "<form action='/auto-parts/warehouseFolder/printFiles/printInvoice.php' method='post'>";
 	echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'>";
 	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'>";
 	if (isset($_POST['date'])) {
@@ -178,7 +178,7 @@ echo "<form action='/warehouseFolder/printFiles/printInvoice.php' method='post'>
 echo "</form>";
 
 // add buttons to print shipping label.
-echo "<form action='/warehouseFolder/printFiles/printShippingLabel.php' method='post'>";
+echo "<form action='/auto-parts/warehouseFolder/printFiles/printShippingLabel.php' method='post'>";
 	echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'> <br>";
 	//submit button for packing list
 	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'>";
