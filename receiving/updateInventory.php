@@ -43,8 +43,6 @@ $num = $_POST['number'];
 $dsc = $_POST['description'];
 $qnt = $_POST['quantity'];
 
-echo "<br> ($dsc) <br>";
-
 if ($qnt == NULL){
   //A valid quantity to increment is required.
   echo "<br> Please enter a valid quantity";
