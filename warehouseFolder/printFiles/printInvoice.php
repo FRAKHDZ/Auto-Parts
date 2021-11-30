@@ -47,12 +47,12 @@ if ($result->num_rows > 0) {
 
 
 //put query for customer info here
-$sql = "SELECT date, name, email, shippingAddress FROM customerOrder WHERE authNum=".$_POST["authNumPass"]." LIMIT 1";  //Maybe add pictures
+$sql = "SELECT Order_Date, name, email, shippingAddress FROM customerOrder WHERE authNum=".$_POST["authNumPass"]." LIMIT 1";  //Maybe add pictures
 $result = $conn->query($sql) or die($conn->error);
 
 // assign customer info to cust variables
 $row = $result->fetch_assoc();      //load row
-$custDate = $row['date'];
+$custDate = $row['Order_Date'];
 $custName = $row['name'];
 $custEmail = $row['email'];
 $custAddress = $row['shippingAddress'];

@@ -26,14 +26,14 @@ if ($conn->connect_error) {
 $conn->set_charset("utf8");
 
 // Collects data from "parts" table 
-$sql = "SELECT * FROM customerorder WHERE dateShipped IS NULL ORDER BY date";
+$sql = "SELECT * FROM customerorder WHERE dateShipped IS NULL ORDER BY Order_Date";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// print header
 	Print "<h1>Choose a order to start packing</h1><br>";
 	Print "<table border>"; 
 	Print "<tr>"; 
-	Print "<th>Order to pack</th><th>authNum</th><th>date</th><th>name</th><th>email</th><th>shippingAddress</th>";
+	Print "<th>Order to pack</th><th>authNum</th><th>Order Date</th><th>name</th><th>email</th><th>shippingAddress</th>";
 	Print "</tr>";
 	//	loop til all orders are printed
 	while($row = $result->fetch_assoc()) { 
@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
 		Print "<tr>"; 
 		Print "<td><input type='radio' name='authNumPass' value='".$row['authNum']."'> </td>";
 		Print "<td>".$row['authNum']."</td>";
-		Print "<td>".$row['date']."</td>"; 
+		Print "<td>".$row['Order_Date']."</td>"; 
 		Print "<td>".$row['name']." </td>"; 
 		Print "<td>".$row['email']." </td>"; 
 		Print "<td>".$row['shippingAddress'] . " </td>";  
