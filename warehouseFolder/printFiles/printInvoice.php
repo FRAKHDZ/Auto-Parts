@@ -27,7 +27,7 @@ $conn->set_charset("utf8");
 // zero out counter
 $counter = 0;
 // Collects data from "parts" table 
-$sql = "SELECT number, quant FROM partsordered WHERE authNum=".$_POST["transNumPass"];
+$sql = "SELECT number, quant FROM partsordered WHERE transNum=".$_POST["transNumPass"];
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// assign the number of rows to numR
@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
 
 
 //put query for customer info here
-$sql = "SELECT Order_Date, name, email, shippingAddress FROM customerOrder WHERE authNum=".$_POST["transNumPass"]." LIMIT 1";  //Maybe add pictures
+$sql = "SELECT Order_Date, name, email, shippingAddress FROM customerOrder WHERE transNum=".$_POST["transNumPass"]." LIMIT 1";  //Maybe add pictures
 $result = $conn->query($sql) or die($conn->error);
 
 // assign customer info to cust variables

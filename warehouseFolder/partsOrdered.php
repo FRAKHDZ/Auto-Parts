@@ -27,7 +27,7 @@ $conn->set_charset("utf8");
 // zero out counter
 $counter = 0;
 // Collects data from "parts" table 
-$sql = "SELECT number, quant FROM partsordered WHERE authNum=".$_POST["transNumPass"];
+$sql = "SELECT number, quant FROM partsordered WHERE transNum=".$_POST["transNumPass"];
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// assign the number of rows to numR
@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
 //Check if date is in post
 if (isset($_POST['date'])) {
 	//if yes then update the customerOrder table
-	$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE authNum = ".$_POST["transNumPass"];
+	$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE transNum = ".$_POST["transNumPass"];
 
 	if ($conn->query($sql) === FALSE) {
     	echo "Error updating record: " . $conn->error;

@@ -33,14 +33,14 @@ if ($result->num_rows > 0) {
 	Print "<h1>Choose a order to start packing</h1><br>";
 	Print "<table border>"; 
 	Print "<tr>"; 
-	Print "<th>Order to pack</th><th>authNum</th><th>Order Date</th><th>name</th><th>email</th><th>shippingAddress</th>";
+	Print "<th>Order to pack</th><th>transNum</th><th>Order Date</th><th>name</th><th>email</th><th>shippingAddress</th>";
 	Print "</tr>";
 	//	loop til all orders are printed
 	while($row = $result->fetch_assoc()) { 
 		// add a radio button to replace the text box 
 		Print "<tr>"; 
-		Print "<td><input type='radio' name='transNumPass' value='".$row['authNum']."'> </td>";
-		Print "<td>".$row['authNum']."</td>";
+		Print "<td><input type='radio' name='transNumPass' value='".$row['transNum']."'> </td>";
+		Print "<td>".$row['transNum']."</td>";
 		Print "<td>".$row['Order_Date']."</td>"; 
 		Print "<td>".$row['name']." </td>"; 
 		Print "<td>".$row['email']." </td>"; 

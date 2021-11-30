@@ -25,7 +25,7 @@ if ($conn->connect_error) {
 $conn->set_charset("utf8");
 
 //Make a query to get customer name, order date, shipping address, and dateShipped
-$sql = "SELECT Order_Date, name, shippingAddress, dateShipped FROM customerOrder WHERE authNum=".$_POST["transNumPass"]." LIMIT 1";  //Maybe add pictures
+$sql = "SELECT Order_Date, name, shippingAddress, dateShipped FROM customerOrder WHERE transNum=".$_POST["transNumPass"]." LIMIT 1";  //Maybe add pictures
 $result = $conn->query($sql) or die($conn->error);
 
 // assign customer info to cust variables
@@ -55,7 +55,7 @@ echo "</h4>";
 
 /*  This is done in partsOrderd now.
 //update the customerOrder table
-$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE authNum = ".$_POST["transNumPass"];
+$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE transNum = ".$_POST["transNumPass"];
 
 if ($conn->query($sql) === FALSE) {
     echo "Error updating record: " . $conn->error;
