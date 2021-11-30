@@ -65,7 +65,7 @@ $from = 0;
 $to = 0;
 
 // Collects data from "parts" table 
-$sql = "SELECT weight, price FROM shippingbrackets";
+$sql = "SELECT Weight, Price FROM shippingbrackets ORDER BY Weight ASC";
 $result = $conn->query($sql);
 // assign weight bracket values to the from and to values.
 // also set priceShipping
@@ -73,14 +73,14 @@ if ($result->num_rows > 0) {
     // To get the bottom of the weight bracket:
     // Loop through result while theres still data in result
     // AND while shipping weight (passed from POST) is greater than than the weight of current bracket.
-	while($row = $result->fetch_assoc() and ($_POST["shippingWeight"] > $row['weight'])) { 
-        $from = $row['weight'];             // Set the bottom of weight bracket (from) to weight of current row
+	while($row = $result->fetch_assoc() and ($_POST["shippingWeight"] > $row['Weight'])) { 
+        $from = $row['Weight'];             // Set the bottom of weight bracket (from) to weight of current row
 	}
 
     // The current $row['weight'] should hold the top of weight bracket.
-    $to = $row['weight'];               // Assign this value to the top of weight bracket (to)
+    $to = $row['Weight'];               // Assign this value to the top of weight bracket (to)
     // This row will also hold how much will be charged for shipping
-    $priceShipping = $row['price'];     // Assign this price to the priceShipping value
+    $priceShipping = $row['Price'];     // Assign this price to the priceShipping value
 
 } else {
 	Print "0 records found";
