@@ -20,7 +20,7 @@ $conn->set_charset("utf8");
 // zero out counter
 $counter = 0;
 // Collects data from "parts" table 
-$sql = "SELECT number, quant FROM partsordered WHERE authNum=".$_POST["authNumPass"];
+$sql = "SELECT number, quant FROM partsordered WHERE authNum=".$_POST["transNumPass"];
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// assign the number of rows to numR
@@ -80,7 +80,7 @@ $conn->close();
 
 
 // print opening message
-echo "<h1>Packing list for order ".$_POST["authNumPass"]."</h1>";
+echo "<h1>Packing list for order ".$_POST["transNumPass"]."</h1>";
 // Lets print the table to the screen.
 // zero out counter again
 $counter = 0;

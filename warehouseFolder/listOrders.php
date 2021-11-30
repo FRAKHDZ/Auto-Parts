@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) { 
 		// add a radio button to replace the text box 
 		Print "<tr>"; 
-		Print "<td><input type='radio' name='authNumPass' value='".$row['authNum']."'> </td>";
+		Print "<td><input type='radio' name='transNumPass' value='".$row['authNum']."'> </td>";
 		Print "<td>".$row['authNum']."</td>";
 		Print "<td>".$row['Order_Date']."</td>"; 
 		Print "<td>".$row['name']." </td>"; 

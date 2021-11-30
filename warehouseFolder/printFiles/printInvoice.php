@@ -27,7 +27,7 @@ $conn->set_charset("utf8");
 // zero out counter
 $counter = 0;
 // Collects data from "parts" table 
-$sql = "SELECT number, quant FROM partsordered WHERE authNum=".$_POST["authNumPass"];
+$sql = "SELECT number, quant FROM partsordered WHERE authNum=".$_POST["transNumPass"];
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// assign the number of rows to numR
@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
 
 
 //put query for customer info here
-$sql = "SELECT Order_Date, name, email, shippingAddress FROM customerOrder WHERE authNum=".$_POST["authNumPass"]." LIMIT 1";  //Maybe add pictures
+$sql = "SELECT Order_Date, name, email, shippingAddress FROM customerOrder WHERE authNum=".$_POST["transNumPass"]." LIMIT 1";  //Maybe add pictures
 $result = $conn->query($sql) or die($conn->error);
 
 // assign customer info to cust variables
@@ -132,7 +132,7 @@ $conn->close(); // Disconnect from blitz.cs.niu.edu
 // print invoice header before table:
 echo "<h1>Invoice</h1>";
 // print our company info
-echo "<h3>Order number: ".$_POST["authNumPass"];
+echo "<h3>Order number: ".$_POST["transNumPass"];
 echo "<br>Order Date: ".$custDate;
 echo "<br>Shipped on: ";
 if (isset($_POST['shipDate']))
