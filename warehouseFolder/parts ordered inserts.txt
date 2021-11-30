@@ -11,24 +11,24 @@
 INSERT INTO partsordered (number, transNum, quant) VALUES (1, 807987654321991, 15);
 INSERT INTO partsordered (number, transNum, quant) VALUES (2, 807987654321991, 4);
 INSERT INTO partsordered (number, transNum, quant) VALUES (5, 807987654321991, 1);
-INSERT INTO partsordered (number, transNum, quant) VALUES (10, 807987654321991, 15);
+INSERT INTO partsordered (number, transNum, quant) VALUES (4, 807987654321991, 15);
 
 
 907987654321990
 INSERT INTO partsordered (number, transNum, quant) VALUES (2, 907987654321990, 5);
 INSERT INTO partsordered (number, transNum, quant) VALUES (3, 907987654321990, 17);
-INSERT INTO partsordered (number, transNum, quant) VALUES (20, 907987654321990, 2);
+INSERT INTO partsordered (number, transNum, quant) VALUES (4, 907987654321990, 2);
 
 
 907987654321991
-INSERT INTO partsordered (number, transNum, quant) VALUES (11, 907987654321991, 15);
-INSERT INTO partsordered (number, transNum, quant) VALUES (12, 907987654321991, 4);
-INSERT INTO partsordered (number, transNum, quant) VALUES (15, 907987654321991, 1);
-INSERT INTO partsordered (number, transNum, quant) VALUES (21, 907987654321991, 15);
+INSERT INTO partsordered (number, transNum, quant) VALUES (1, 907987654321991, 15);
+INSERT INTO partsordered (number, transNum, quant) VALUES (4, 907987654321991, 4);
+INSERT INTO partsordered (number, transNum, quant) VALUES (5, 907987654321991, 1);
+INSERT INTO partsordered (number, transNum, quant) VALUES (2, 907987654321991, 15);
 
 
 907987654321992
 INSERT INTO partsordered (number, transNum, quant) VALUES (5, 907987654321992, 3);
-INSERT INTO partsordered (number, transNum, quant) VALUES (7, 907987654321992, 4);
-INSERT INTO partsordered (number, transNum, quant) VALUES (9, 907987654321992, 1);
-INSERT INTO partsordered (number, transNum, quant) VALUES (16, 907987654321992, 10);
+INSERT INTO partsordered (number, transNum, quant) VALUES (2, 907987654321992, 4);
+INSERT INTO partsordered (number, transNum, quant) VALUES (3, 907987654321992, 1);
+INSERT INTO partsordered (number, transNum, quant) VALUES (4, 907987654321992, 10);
