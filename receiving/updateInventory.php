@@ -39,73 +39,50 @@ echo "<input type='submit'>";
 
 echo "</form>";
 
-//echo $_POST['description'];
-
-$rNum = 0;
-//Increments the database by the amount set
-
-/*
-echo "<br>";
-echo $_POST['number'];
-echo "<br>";
-echo $_POST['description'];
-echo "<br>";
-echo $_POST['quantity'];
-*/
-
 $num = $_POST['number'];
 $dsc = $_POST['description'];
 $qnt = $_POST['quantity'];
 
-echo "<br> $dsc";
-
-
-if ($num != NULL) {
-  $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE number = $num";
-  $rNum = 1;
+if ($qnt == NULL){
+  //A valid quantity to increment is required.
+  echo "<br> Please enter a valid quantity";
 }
-
-if ($dsc != NULL) {
-  $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE description = '$dsc'";
-  $rNum = 2;
+elseif (($num && $dsc) != NULL){
+  //Check if there is a valid item in the database. Fetch number counted and turn into integer.
+  $count = $conn->query("SELECT COUNT(1) FROM inventory WHERE number = $num AND description = '$dsc'")->fetch_array()[0]; 
+  //If so, update inventory and inform user.
+  if ($count == 1){
+    $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE number = $num AND description = '$dsc'";
+    $conn->query($sql) or die($conn->error);
+    echo "<br> Item #$num, '$dsc updated by $qnt!";
+  }
+  else 
+    echo "<br> Item #$num, '$dsc' is an invalid item.";
 }
-$conn->query($sql) or die($conn->error);
-
-//$sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE description = '$dsc'";
-
-
-//else {
-//  echo "<br> Invalid Number and Description";
-//}
-
-
-//Correct Code for string, I guess.
-//$descBoy = "Wrench";
-//$sql = "UPDATE inventory SET quantity = 500 WHERE description = '$descBoy'";
-//$conn->query($sql) or die($conn->error);
-
-//This worked: UPDATE `inventory` SET `quantity`=200 WHERE `description`="Wrench"
-
-
-//if ($conn->query($sql) === TRUE) {
-//    echo "Record updated successfully";
-//  } else {
-//    echo "Error updating record: " . $conn->error;
-//}
-
-if($rNum == 1){
-  echo "<br> Item Number ";
-  echo $_POST['number'];
-  echo " updated by ";
-  echo $_POST['quantity'];
-  echo "! <br>";
+elseif ($num != NULL) {
+  //Same as previous elseif
+  $count = $conn->query("SELECT COUNT(1) FROM inventory WHERE number = $num")->fetch_array()[0]; 
+  if ($count == 1){
+    $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE number = $num";
+    $conn->query($sql) or die($conn->error);
+    echo "<br> Item #$num updated by $qnt!";
+  }
+  else
+    echo "<br> Item #$num is an invalid item.";
 }
-if($rNum == 2){
-  echo "<br>";
-  echo $_POST['description'];
-  echo " updated by ";
-  echo $_POST['quantity'];
-  echo "! <br>";
+elseif ($dsc != NULL) {
+  $count = $conn->query("SELECT COUNT(1) FROM inventory WHERE description = '$dsc'")->fetch_array()[0]; 
+  if ($count == 1){
+    $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE description = '$dsc'";
+    $conn->query($sql) or die($conn->error);
+    echo "<br> Item '$dsc' updated by $qnt!";
+  }
+  else 
+    echo "<br> Item '$dsc' is an invalid item.";
+}
+else {
+  //If nothing entered, inform user.
+  echo "<br> Number and Description must not be left blank.";
 }
 
 unset($num);
@@ -114,12 +91,8 @@ unset($qnt);
 unset($_POST['number']);
 unset($_POST['description']);
 unset($_POST['quantity']);
-unset($rNum);
 
 $conn->close();
-
-//echo "<br> The new value of description is ";
-//echo $_POST["description"];
 
 ?>
 
