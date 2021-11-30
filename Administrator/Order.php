@@ -34,6 +34,7 @@
     }
     else
     {
+        echo "flag";  // take out later
         $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder ORDER BY Order_Date DESC');
     }
 
