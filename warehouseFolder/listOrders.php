@@ -5,7 +5,7 @@
 </head>
 <body>	
 
-<form action='/warehouseFolder/partsOrdered.php' method='post'>
+<form action='/partsOrdered.php' method='post'>
 <?php 
 
 $servername = "localhost";
