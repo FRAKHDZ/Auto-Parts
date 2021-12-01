@@ -12,7 +12,7 @@
     //initialize flag to 0
     $flag = 0;
 
-    if($transNum && !$price_min && !$price_max && !$d3ate_min && !$date_max)
+    if($transNum && !$price_min && !$price_max && !$date_min && !$date_max)
     {
         //$statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE transNum = :transNum ORDER BY Order_Date DESC');
         $statement = $pdo->prepare('SELECT transNum, Order_Date FROM customerorder WHERE transNum = :transNum ORDER BY Order_Date DESC');
