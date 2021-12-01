@@ -28,9 +28,10 @@ Huskie Auto Parts</h1>
 <?php 
 
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbname = "auto-parts";
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -63,8 +64,8 @@ $conn->close();
 <?php
 
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbname = "auto-parts";
 
 
@@ -114,8 +115,8 @@ echo "<h3><br>Total: $" . $total . "<br><br></h3>";
 <?php 
 
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbname = "auto-parts";
 
 // Create connection
@@ -133,13 +134,13 @@ $conn->set_charset("utf8");
 // Collects data from "customers" table 
 $sql = "INSERT INTO `cart`(`number`, `quantity`) VALUES ('". $_GET["num"] . "','1')";
 $result = $conn->query($sql);
-if ($result->num_rows > 0) {
+/* if ($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {  
 	} 
 	Print "</table>"; 
 } else {
 	Print "0 records found";
-}
+} */
 $conn->close();
 ?>
 

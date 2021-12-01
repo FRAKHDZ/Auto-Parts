@@ -22,8 +22,8 @@ Huskie Auto Parts</h1>
 <?php 
 
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbname = "auto-parts";
 
 // Create connection
@@ -57,8 +57,8 @@ $conn->close();
 <?php
 
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbname = "auto-parts";
 
 

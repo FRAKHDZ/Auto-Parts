@@ -17,6 +17,9 @@ Huskie Auto Parts</h1>
 
 <hr class="titleHR">
 <?php
+
+
+//access legacy database
 $servername = "blitz.cs.niu.edu";
 $username = "student";
 $password = "student";
@@ -27,6 +30,44 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 $sql = "SELECT * FROM parts";
 $result = $conn->query($sql);
+$conn->close();
+
+if (isset($_POST['num'])) {
+	// add to the cart
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "auto-parts";
+
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+
+	// Check connection
+	if ($conn->connect_error) {
+	} 
+
+	/* change character set to utf8 */
+	$conn->set_charset("utf8");
+
+	//check if part number is in cart
+	$sql = "SELECT * FROM cart WHERE partNum=".$_POST['num'];
+	$result2 = $conn->query($sql);
+	//$row = $result->fetch_assoc();
+	if($result2->num_rows == FALSE)
+	{
+		//if num_rows is false, insert it into cart table
+		$sql = "INSERT INTO cart (partNum, quant) VALUES (".$_POST['num'].", ".$_POST['quant'].")";
+		$result2 = $conn->query($sql);
+	} else {
+		//else update the record on the cart table by the quantity
+		$sql = "UPDATE cart SET quant=".$_POST['quant']."+quant WHERE partNum=" . $_POST["num"];
+		$result2 = $conn->query($sql);
+	}
+	$conn->close();
+}
+
+
 
 if ($result->num_rows > 0) {
   // output data of each row
@@ -35,12 +76,13 @@ if ($result->num_rows > 0) {
 		  $row["description"] . 
 		"<br>" . $row["weight"] .	
 		  ' lB<br><br>$' . $row["price"].
-		"<form action= ". '"' . 'checkout.php">' 
-	. '<input type="hidden" id="num" name="num" value="' . $row["number"] . '">' . 
-	'<input class="btnProduct" type="submit" value="Buy">' . '</form></h3><hr class="productHR"><br><br>';
+		'<form action='. '"" method="post">'
+	. '<input type="hidden" id="num" name="num" value="' . $row["number"] . '">';
+	echo '<input type=text id="quant" name="quant" value=1>'; 
+	echo '<input class="btnProduct" type="submit" value="Buy">' . '</form></h3><hr class="productHR"><br><br>';
   }
 }
-$conn->close();
+
 ?>
 
 </body>
