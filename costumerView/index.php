@@ -9,6 +9,7 @@
 
 <ul class="topnav">
 	<li class="active"><a  href="index.php">All Parts</a></li> 
+	<?php //add total quant in cart next to the cart link ?>
 	<li class="right"><a href="cart.php">Cart</a></li>
 </ul> 
 <br>
