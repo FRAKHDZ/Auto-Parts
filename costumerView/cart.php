@@ -34,8 +34,7 @@ Huskie Auto Parts</h1>
 
 <?php
 
-
-//edit to ping legacy database for all the jucy data!!!!!!!!
+include 'custFunctions.php';    //for getCartData() function
 
 
 
