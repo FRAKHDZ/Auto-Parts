@@ -37,7 +37,7 @@ if ($conn->connect_error) {
 $conn->set_charset("utf8");
 
 // Collects data from "customers" table 
-$sql = "UPDATE cart SET quantity=quantity-1 WHERE num=" . $_GET["num"];
+$sql = "DELETE FROM cart WHERE partNum=" . $_GET["num"]." ;";
 $result = $conn->query($sql);
 $conn->close();
 ?>
@@ -56,45 +56,40 @@ $conn->close();
 
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "auto-parts";
+include 'custFunctions.php';    //for getCartData() function
 
 
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
 
-$sql = "SELECT * FROM cart WHERE quantity != 0";
-$result = $conn->query($sql);
-$total = 0.00;
+//call getCartData() to load cartData array
+$cartData = getCartData();
+$numR = count($cartData);	//assign number of rows to numR
+$total = 0.00;					// zero out total
 
-if ($result->num_rows > 0) {
+
+$counter = 0;		//zero out counter.
+if ($numR > 0) {
   // output data of each row
-  while($row = $result->fetch_assoc()) {
-	  echo '<img src="' . $row["pictureURL"] . '" width="460" height="345"><br>' .
-		  "<h3>Product: " . $row["description"] . 
-		  "<br>" . "Weight: " . $row["weight"] .	
-		  "<br> Quantity: " . $row["quantity"] . 
-		"<br><br>" . "Price: $" . $row["price"].
+  while($counter < $numR) {
+	  echo '<img src="' . $cartData[$counter]["pictureURL"] . '" width="460" height="345"><br>' .
+		  "<h3>Product: " . $cartData[$counter]["description"] . 
+		  "<br>" . "Unit Weight: " . $cartData[$counter]["weight"] .	
+		  "<br> Quantity: " . $cartData[$counter]["quant"] . 
+		"<br><br>" . "Unit Price: $" . $cartData[$counter]["price"].
 		
 		"</h3><form action= ". '"' . 'checkout_delete.php">' 
  
-	. '<input type="hidden" id="num" name="num" value="' . $row["num"] . '">'  
+	. '<input type="hidden" id="num" name="num" value="' . $cartData[$counter]["partNum"] . '">'  
 	. 	'<input class="btn" type="submit" value="Delete">' . '</form>';
   
-		$total = ($row["quantity"] * $row["price"]) + $total;	
-  
+		$total = ($cartData[$counter]["quant"] * $cartData[$counter]["price"]) + $total;	
+		
+		$counter = $counter + 1;
   }
 } else {
   echo "0 results";
 }
-$conn->close();
+
 echo "<h3><br>Total: $" . $total . "<br><br></h3>";
 ?>
 
