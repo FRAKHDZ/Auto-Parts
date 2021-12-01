@@ -30,8 +30,8 @@ echo "<h1>Receiving Desk</h1>";
 
 echo "<form action='' method='post'>";
 
-echo "Enter Number and/or Description of Item <br>";
-echo "Number: <input type='text' name='number'> <br>";
+echo "Enter Item ID Number and/or Description of Item <br>";
+echo "ID Number: <input type='text' name='number'> <br>";
 echo "Description: <input type='text' name='description'> <br> <br>";
 echo "Enter Increment Quantity <br>";
 echo "<input type='text' name='quantity'> <br> <br>";
