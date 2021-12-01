@@ -57,11 +57,13 @@ if ($result->num_rows > 0) {
 echo "Total: " . $total . "<br></br>";
 $conn->close();
 
-echo '<input type="hidden" id="total" name="total" value="' . $total . '">
-<input class="btn" type="submit" value="purchase">
-</form>'	
+echo '<input type="hidden" id="total" name="total" value="' . $total . '">';
+	
 
 ?></h3>
+
+	<input class="btn" type="submit" value="purchase">
+</form>
 
 </body>
 </html>
