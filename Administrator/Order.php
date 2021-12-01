@@ -64,7 +64,7 @@
     <title>Order list</title>
 </head>
 <body>
-    <a href="Admin.php">Administrator Page</a>
+    <a href="index.php">Administrator Page</a>
     <a href="WeightB.php">Weight Bracket Page</a>
     <br><br>
     <h4>Filter Option</h4>

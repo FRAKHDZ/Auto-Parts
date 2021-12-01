@@ -17,7 +17,7 @@
     <title>Weight Bracket</title>
 </head>
 <body>
-    <a href="Admin.php">Administrator Page</a>
+    <a href="index.php">Administrator Page</a>
     <a href="Order.php">Order Page</a>
     <h1>Weight Bracket</h1>
 
