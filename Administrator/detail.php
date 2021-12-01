@@ -1,7 +1,7 @@
 <?php
 $pdo = require_once "database.php";
 
-$transNum = $_GET['transNum'];
+$transNum = $_POST['transNum'];
 
  $statement = $pdo->prepare('SELECT * FROM customerorder WHERE transNum = :transNum');
  $statement->bindValue(':transNum', $transNum);
@@ -9,7 +9,8 @@ $transNum = $_GET['transNum'];
  $orders = $statement->fetchAll(PDO::FETCH_ASSOC);
  foreach($orders as $order)
  {
-     $status = $order['orderStatus'];
+     //$status = $order['orderStatus'];
+     $dateShipped = $order['dateShipped'];
      $email = $order['email'];
      $address = $order['shippingAddress'];
      $date = $order['Order_Date'];
@@ -38,11 +39,12 @@ foreach($parts as $part)
     <title>Order Detail</title>
   </head>
   <body>
-    <h2>Order transaction #<?php echo $transNum?>, Status: <?php echo $status?></h2>
+    <h2>Order transaction #<?php echo $transNum?></h2>
     <br>
     <h4>Customer Information:</h4>
     <p>Name: <?php echo $name?></p>
     <p>Order date: <?php echo $date?></p>
+    <p>Date Shipped: <?php echo $dateShipped?></p>
     <p>Address: <?php echo $address?></p>
     <p>email: <?php echo $email?></p>
     <h4>Parts order:</h4>
