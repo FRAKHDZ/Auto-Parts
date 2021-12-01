@@ -42,6 +42,7 @@ include 'custFunctions.php';    //for getCartData() function
 //call getCartData() to load cartData array
 $cartData = getCartData();
 $numR = count($cartData);	//assign number of rows to numR
+$total = 0.00;					// zero out total
 
 
 $counter = 0;		//zero out counter.
@@ -66,7 +67,7 @@ if ($numR > 0) {
 } else {
   echo "0 results";
 }
-$conn->close(); //close connection with local DB
+
 echo "<h3><br>Total: $" . $total . "<br><br></h3>";
 ?>
 

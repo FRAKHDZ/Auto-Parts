@@ -21,7 +21,6 @@ function getCartData()
     // here we are getting partNum and quant from the cart table
     $sql = "SELECT * FROM cart WHERE quant != 0";
     $cartQueryReturn = $conn->query($sql); // store it in cartQueryReturn
-    $total = 0.00;					// zero out total
     $counter = 0;					//zero out counter
     if ($cartQueryReturn->num_rows > 0) {
         //set a var named numR as the number of rows in cartQueryReturn
