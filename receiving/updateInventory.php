@@ -115,6 +115,7 @@ elseif ( isset($dsc) && $dsc != NULL) {
 else {
   //If nothing entered, inform user.
   echo "<br> Enter an item number, description, or both.";
+  echo "<br> Then, enter a positive or negative quantity to increment inventory.";
 }
 
 unset($num);
