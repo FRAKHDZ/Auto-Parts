@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Receiving Desk</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="app.css" rel="stylesheet"/>
+  <title>Receiving Desk</title>
 </head>
 <body>
 
+<h1>Receiving Desk</h1>
+
+
+
+<h3>
+  <form action='' method="post">
+    <br>
+    <label for="number">ID Number:</label><br>
+    <input type="text" name="number"><br>
+    <label for="description">Description:</label><br>
+    <input type="text" name="description"><br><br>
+    <label for="quantity">Quantity:</label><br>
+    <input type="text" name="quantity"><br><br>
+    <button class="btn btn-outline-primary" type="submit">Submit</button>
+    <br>
 <?php 
+
+//<link rel="stylesheet" href="style.css">
 
 $servername = "localhost";
 $username = "root";
@@ -22,10 +44,11 @@ if ($conn->connect_error) {
 //echo "Connected successfully to: " . $servername;
 
 /* change character set to utf8 */
-$conn->set_charset("utf8");
+//$conn->set_charset("utf8");
 
 //Actual Program
 
+/*
 echo "<h1>Receiving Desk</h1>";
 
 echo "<form action='' method='post'>";
@@ -38,6 +61,8 @@ echo "<input type='text' name='quantity'> <br> <br>";
 echo "<input type='submit'>";
 
 echo "</form>";
+*/
+
 
 if (isset ($_POST['number'])){
   $num = $_POST['number'];
