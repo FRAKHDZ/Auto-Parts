@@ -31,8 +31,8 @@ Huskie Auto Parts</h1>
 	<input type="text" id="email" name="email" value="z1234@niu.edu"><br>
 <?php
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbname = "auto-parts";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
