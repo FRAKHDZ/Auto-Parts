@@ -34,12 +34,17 @@ Huskie Auto Parts</h1>
 
 <?php
 
+
+
+
+
+
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbname = "auto-parts";
 
-
+//edit to ping legacy database for all the jucy data!!!!!!!!
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -48,7 +53,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM cart WHERE quantity != 0";
+$sql = "SELECT * FROM cart WHERE quant != 0";
 $result = $conn->query($sql);
 $total = 0.00;
 
