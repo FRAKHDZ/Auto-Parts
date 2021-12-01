@@ -35,8 +35,17 @@ Huskie Auto Parts</h1>
 <?php
 
 
+//edit to ping legacy database for all the jucy data!!!!!!!!
+
+//This function returns a 2-D array named 
+//cartData[index][field name] = (partNum, quant, price, weight, picUrl, description)
+function getCartData()
+{
 
 
+
+	return $cartData;
+}
 
 
 $servername = "localhost";
@@ -44,7 +53,7 @@ $username = "root";
 $password = "";
 $dbname = "auto-parts";
 
-//edit to ping legacy database for all the jucy data!!!!!!!!
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -53,13 +62,69 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+// here we are getting partNum and quant from the cart table
 $sql = "SELECT * FROM cart WHERE quant != 0";
-$result = $conn->query($sql);
-$total = 0.00;
+$cartQueryReturn = $conn->query($sql); // store it in cartQueryReturn
+$total = 0.00;					// zero out total
+$counter = 0;					//zero out counter
+if ($cartQueryReturn->num_rows > 0) {
+	//set a var named numR as the number of rows in cartQueryReturn
+	$numR = $cartQueryReturn->num_rows;
+	// output data of each row into a array named cartData til there is no data left in cartQueryReturn
+	while($row = $cartQueryReturn->fetch_assoc()) {
+		//load data into cartData[counter][''] from row
+		$cartData[$counter]['partNum'] = $row['partNum'];
+		$cartData[$counter]['quant'] = $row['quant'];
 
-if ($result->num_rows > 0) {
+		$counter = $counter + 1;
+	}
+}
+$conn->close(); //close connection with local DB
+// Now we have a 2D array named cartData = (partNum, quant)
+
+
+// info for legacy database
+$servername = "blitz.cs.niu.edu";
+$username = "student";
+$password = "student";
+$dbname = "csci467";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname) or die("unable to connect");
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+//echo "Connected successfully to: " . $servername;
+
+/* change character set to utf8 */
+$conn->set_charset("utf8");
+
+
+
+
+
+
+
+
+
+
+
+$conn->close(); //close connection with legacy DB
+// Now we have a 2D array named cartData = (partNum, quant, price, weight, picUrl, description)
+
+
+
+
+//if we need to go back to local then put it here
+
+
+
+
+if ($cartData->num_rows > 0) {
   // output data of each row
-  while($row = $result->fetch_assoc()) {
+  while($row = $cartData->fetch_assoc()) {
 	  echo '<img src="' . $row["pictureURL"] . '" width="460" height="345"><br>' .
 		  "<h3>Product: " . $row["description"] . 
 		  "<br>" . "Weight: " . $row["weight"] .	
@@ -77,7 +142,7 @@ if ($result->num_rows > 0) {
 } else {
   echo "0 results";
 }
-$conn->close();
+$conn->close(); //close connection with local DB
 echo "<h3><br>Total: $" . $total . "<br><br></h3>";
 ?>
 
