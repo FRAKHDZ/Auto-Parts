@@ -1,4 +1,6 @@
 <?php
+    include 'functions.php';    //for getOrderTotal($id) function
+
     $pdo = require_once "database.php";
 
     $transNum = $_GET['transNum'] ?? '';
@@ -7,7 +9,7 @@
     $date_min = $_GET['date_min'] ?? '';
     $date_max = $_GET['date_max'] ?? '';
 
-    if($transNum && !$price_min && !$price_max && !$date_min && !$date_max)
+    if($transNum && !$price_min && !$price_max && !$d3ate_min && !$date_max)
     {
         $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE transNum = :transNum ORDER BY Order_Date DESC');
         $statement->bindValue(':transNum', $transNum);
@@ -34,13 +36,14 @@
     }
     else
     {
+        //Get this one to work then do the rest
         echo "flag";  // take out later
-        $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder ORDER BY Order_Date DESC');
+        $statement = $pdo->prepare('SELECT transNum, Order_Date FROM customerorder ORDER BY Order_Date DESC');
     }
 
     $statement->execute();
     $orders = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+    $pdo = null;        //to close out connection
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +94,10 @@
                 <tr>
                     <td><?php echo $order['transNum']?></td>
                     <td><?php echo $order['Order_Date']?></td>
-                    <td><?php echo $order['Price']?></td>
+                    <td><?php 
+                    $num = getOrderTotal($order['transNum']);
+                    echo $num;
+                    ?></td>
                     <td>
                     <a href="detail.php?transNum=<?php echo $order['transNum']?>" type="button" class="btn btn-sm btn-outline-primary">Check</a>
                     </td>
