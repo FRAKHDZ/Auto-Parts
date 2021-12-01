@@ -49,7 +49,7 @@ $result = $conn->query($sql);
 $conn->close();
 ?>
 <h3>
-<form action="payment.php" metod="post">
+<form action="payment.php" method="post">
 	<label for="name">Name:</label><br>
 	<input type="text" id="name" name="name" value="John Doe"><br>
 	<label for="Address">Address:</label><br>
@@ -144,7 +144,7 @@ $result = $conn->query($sql);
 $conn->close();
 ?>
 
-<form action="/Auto-Parts/Auto-Parts/payment.php" metod="post">
+<form action="/Auto-Parts/Auto-Parts/payment.php" method="post">
 	<label for="numID">Quantity: </label>
 	<input type="text" id="numID" name="numID" value="1"><br>
 	<label for="name">Name:</label><br>

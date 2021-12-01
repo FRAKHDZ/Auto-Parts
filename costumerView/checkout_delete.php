@@ -42,7 +42,7 @@ $result = $conn->query($sql);
 $conn->close();
 ?>
 <h3>
-<form action="payment.php" metod="post">
+<form action="payment.php" method="post">
 	<label for="name">Name:</label><br>
 	<input type="text" id="name" name="name" value="John Doe"><br>
 	<label for="Address">Address:</label><br>

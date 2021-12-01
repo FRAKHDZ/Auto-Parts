@@ -20,42 +20,34 @@ Huskie Auto Parts</h1>
 
 <hr class="titleHR">
 
-<form action="proc.php" metod="post">
+<form action="proc.php" method="post">
 <h3><label for="CardNum">Card: </label>
 <br>	<input type="text" id="CardNum" name="CardNum" value="6011 1234 4321 1234"><br>
 	<label for="name">Name on Card:</label><br>
-	<input type="text" id="name" name="name" value="John Doe"><br>
+	<input type="text" id="cardName" name="cardName" value="John Doe"><br>
 	<label for="exp">Expiration Date:</label><br>
 	<input type="text" id="exp" name="exp" value="12/2024"><br>
 	<label for="email">Email:</label><br>
 	<input type="text" id="email" name="email" value="z1234@niu.edu"><br>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "auto-parts";
+include 'custFunctions.php';    //for getCartData() function
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
-
-$conn->set_charset("utf8");
-
-$sql = "SELECT * FROM cart WHERE NOT quantity='0';";
-
-$result = $conn->query($sql);
+$cartData = getCartData();
+$numR = count($cartData);	//assign number of rows to numR
 $total = 0.00;
-if ($result->num_rows > 0) {
-	while($row = $result->fetch_assoc()) {
-		/*echo "Product: " . $row["description"] . "Quantity: " . $row["quantity"] .
-		" Price: " . $row["price"] .  " Total: " . $row["quantity"] * $row["price"] . "<br></br>";
-		 */$total = ($row["quantity"] * $row["price"]) + $total;
-	}
+
+$counter = 0;
+while($counter < $numR) {
+	/*echo "Product: " . $row["description"] . "Quantity: " . $row["quantity"] .
+	" Price: " . $row["price"] .  " Total: " . $row["quantity"] * $row["price"] . "<br></br>";
+	 */
+	$total = ($cartData[$counter]["quant"] * $cartData[$counter]["price"]) + $total;
+
+	$counter = $counter + 1;
 }
+
 echo "Total: " . $total . "<br></br>";
-$conn->close();
+
 
 echo '<input type="hidden" id="total" name="total" value="' . $total . '">';
 	
@@ -63,6 +55,11 @@ echo '<input type="hidden" id="total" name="total" value="' . $total . '">';
 ?></h3>
 
 	<input class="btn" type="submit" value="purchase">
+	<?php
+	echo '<input type="hidden" id="name" name="name" value="'.$_POST['name'].'">';
+	echo '<input type="hidden" id="shippingAddress" name="shippingAddress" value="'.$_POST['address'].'">';
+	echo '<input type="hidden" id="email" name="email" value="'.$_POST['email'].'">';
+	?>
 </form>
 
 </body>
