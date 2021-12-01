@@ -43,16 +43,41 @@ if ($result->num_rows > 0) {
 } else {
 	Print "0 records found";
 }
+//now we have a 2-D array data[$counter] = (number, quant)
 
 
 //Check if date is in post
+//if yes then update the customerOrder table
 if (isset($_POST['date'])) {
-	//if yes then update the customerOrder table
-	$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE transNum = ".$_POST["transNumPass"];
 
+	//check in customerOrder table:
+	// if dateShipped if null
+	$sql = "SELECT dateShipped FROM customerOrder WHERE transNum = ".$_POST["transNumPass"].";";
+	$result = $conn->query($sql);
+	$row = $result->fetch_assoc();
+	if ($row['dateShipped'] == NULL) {
+		//Then deincrment quantity of each part in inventory table
+		$counter = 0;	//zero out counter
+		//cycle through data array using counter
+		while ($counter < $numR)
+		{
+			//make a update query to inventory to deincrment the quantity by data[counter]['quant']
+			$sql = "UPDATE inventory SET quantity = quantity+".$data[$counter]['quant']." WHERE NUMBER = ".$data[$counter]['number']." ;";
+			//Error check
+			if ($conn->query($sql) === FALSE) {
+				echo "Error updating record: " . $conn->error;
+			}
+			$counter = $counter + 1;	//incrment counter
+		}
+	}
+
+
+	//Update the customerOrder table
+	$sql = "UPDATE customerOrder SET dateShipped = '".$_POST['date']."' WHERE transNum = ".$_POST["transNumPass"].";";
+	//Error check
 	if ($conn->query($sql) === FALSE) {
     	echo "Error updating record: " . $conn->error;
-	} 
+	}
 }
 
 $conn->close(); // disconnect from auto-parts on localhost
@@ -103,7 +128,7 @@ $conn->close();
 
 
 // print opening message
-echo "<h1>Parts in order ".$_POST["transNumPass"]."</h1>";
+echo "<h1>Parts in order: ".$_POST["transNumPass"]."</h1>";
 // Lets print the table to the screen.
 // zero out counter again
 $counter = 0;
@@ -151,7 +176,7 @@ if (isset($_POST['date'])) {
 	echo "<form action='' method='post'>";
 		echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'> <br>";
 		//submit button for packing list
-		echo "Date shipped: <input type='text' name='date' id='date' value='".date("Y/m/d")."'> <br>";
+		echo "Date shipped: <input type='date' name='date' id='date' value='".date("Y/m/d")."'> <br>";
 		echo "<input type='submit' value='Mark order as Shipped'> <br>";
 	echo "</form>";
 
