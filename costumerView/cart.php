@@ -51,9 +51,9 @@ if ($numR > 0) {
   while($counter < $numR) {
 	  echo '<img src="' . $cartData[$counter]["pictureURL"] . '" width="460" height="345"><br>' .
 		  "<h3>Product: " . $cartData[$counter]["description"] . 
-		  "<br>" . "Weight: " . $cartData[$counter]["weight"] .	
+		  "<br>" . "Unit Weight: " . $cartData[$counter]["weight"] .	
 		  "<br> Quantity: " . $cartData[$counter]["quant"] . 
-		"<br><br>" . "Price: $" . $cartData[$counter]["price"].
+		"<br><br>" . "Unit Price: $" . $cartData[$counter]["price"].
 		
 		"</h3><form action= ". '"' . 'checkout_delete.php">' 
  
