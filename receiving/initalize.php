@@ -1,6 +1,7 @@
 <?php
 
 //only run if inializing inventory table
+//Otherwise DO NOT RUN
 
 
 /* //access legacy database
