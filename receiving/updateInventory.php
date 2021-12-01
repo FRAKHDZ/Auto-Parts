@@ -39,15 +39,22 @@ echo "<input type='submit'>";
 
 echo "</form>";
 
-$num = $_POST['number'];
-$dsc = $_POST['description'];
-$qnt = $_POST['quantity'];
+if (isset ($_POST['number'])){
+  $num = $_POST['number'];
+}
+if (isset ($_POST['description'])){
+  $dsc = $_POST['description'];
+}
+if (isset ($_POST['quantity'])){
+  $qnt = $_POST['quantity'];
+}
 
-if ($qnt == NULL){
+
+if ( (isset($qnt)) && $qnt == NULL){
   //A valid quantity to increment is required.
   echo "<br> Please enter a valid quantity";
 }
-elseif (($num && $dsc) != NULL){
+elseif ( isset($num) && isset($dsc) && $num != NULL && $dsc != NULL){
   //Check if there is a valid item in the database. Fetch number counted and turn into integer.
   $count = $conn->query("SELECT COUNT(1) FROM inventory WHERE number = $num AND description = '$dsc'")->fetch_array()[0]; 
   //If so, update inventory and inform user.
@@ -59,7 +66,7 @@ elseif (($num && $dsc) != NULL){
   else 
     echo "<br> Item #$num, '$dsc' is an invalid item.";
 }
-elseif ($num != NULL) {
+elseif ( isset($num) && $num != NULL) {
   //Same as previous elseif
   $count = $conn->query("SELECT COUNT(1) FROM inventory WHERE number = $num")->fetch_array()[0]; 
   if ($count == 1){
@@ -70,7 +77,7 @@ elseif ($num != NULL) {
   else
     echo "<br> Item #$num is an invalid item.";
 }
-elseif ($dsc != NULL) {
+elseif ( isset($dsc) && $dsc != NULL) {
   $count = $conn->query("SELECT COUNT(1) FROM inventory WHERE description = '$dsc'")->fetch_array()[0]; 
   if ($count == 1){
     $sql = "UPDATE inventory SET quantity = quantity + $qnt WHERE description = '$dsc'";
@@ -82,7 +89,7 @@ elseif ($dsc != NULL) {
 }
 else {
   //If nothing entered, inform user.
-  echo "<br> Number and Description must not be left blank.";
+  echo "<br> Enter an item number, description, or both.";
 }
 
 unset($num);
