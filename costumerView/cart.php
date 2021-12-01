@@ -23,7 +23,7 @@ Huskie Auto Parts</h1>
 <form action="payment.php" method="post">
 	<label for="name">Name:</label><br>
 	<input type="text" id="name" name="name" value="John Doe"><br>
-	<label for="Address">Address:</label><br>
+	<label for="address">Address:</label><br>
 	<input type="text" id="address" name="address" value="123 Main St"><br>
 	<label for="email">Email:</label><br>
 	<input type="text" id="email" name="email" value="z1234@niu.edu"><br>

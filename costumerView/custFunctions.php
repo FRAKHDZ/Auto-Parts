@@ -85,4 +85,37 @@ function getCartData()
 //echo $output;
 
 
+function clearCart() {
+    //add orderData to customerorder table
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "auto-parts";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+die("Connection failed: " . $conn->connect_error);
+}
+
+/* change character set to utf8 */
+$conn->set_charset("utf8");
+
+//delete cart table
+$sql = "DROP TABLE cart;";
+$result = $conn->query($sql);  //run query
+//re-create cart table
+$sql = "CREATE TABLE `auto-parts`.`cart` ( `partNum` INT NOT NULL , `quant` INT NOT NULL , PRIMARY KEY (`partNum`)) ENGINE = InnoDB;";
+$result = $conn->query($sql);  //run query
+
+
+
+$conn->close(); 
+}
+
+
+
+
+
 ?>

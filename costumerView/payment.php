@@ -27,8 +27,6 @@ Huskie Auto Parts</h1>
 	<input type="text" id="cardName" name="cardName" value="John Doe"><br>
 	<label for="exp">Expiration Date:</label><br>
 	<input type="text" id="exp" name="exp" value="12/2024"><br>
-	<label for="email">Email:</label><br>
-	<input type="text" id="email" name="email" value="z1234@niu.edu"><br>
 <?php
 include 'custFunctions.php';    //for getCartData() function
 
@@ -48,18 +46,15 @@ while($counter < $numR) {
 
 echo "Total: " . $total . "<br></br>";
 
+echo '<input class="btn" type="submit" value="Purchase">';
 
 echo '<input type="hidden" id="total" name="total" value="' . $total . '">';
-	
+echo '<input type="hidden" id="name" name="name" value="'.$_POST['name'].'">';
+echo '<input type="hidden" id="shippingAddress" name="shippingAddress" value="'.$_POST['address'].'">';
+echo '<input type="hidden" id="email" name="email" value="'.$_POST['email'].'">';	
 
 ?></h3>
 
-	<input class="btn" type="submit" value="purchase">
-	<?php
-	echo '<input type="hidden" id="name" name="name" value="'.$_POST['name'].'">';
-	echo '<input type="hidden" id="shippingAddress" name="shippingAddress" value="'.$_POST['address'].'">';
-	echo '<input type="hidden" id="email" name="email" value="'.$_POST['email'].'">';
-	?>
 </form>
 
 </body>
