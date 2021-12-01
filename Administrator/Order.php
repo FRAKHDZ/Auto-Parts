@@ -1,4 +1,6 @@
 <?php
+    include 'functions.php';    //for getOrderTotal($id) function
+
     $pdo = require_once "database.php";
 
     $transNum = $_GET['transNum'] ?? '';
@@ -7,39 +9,46 @@
     $date_min = $_GET['date_min'] ?? '';
     $date_max = $_GET['date_max'] ?? '';
 
-    if($transNum && !$price_min && !$price_max && !$date_min && !$date_max)
+    if($transNum && !$price_min && !$price_max && !$d3ate_min && !$date_max)
     {
-        $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE transNum = :transNum ORDER BY Order_Date DESC');
+        //$statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE transNum = :transNum ORDER BY Order_Date DESC');
+        $statement = $pdo->prepare('SELECT transNum, Order_Date FROM customerorder WHERE transNum = :transNum ORDER BY Order_Date DESC');
         $statement->bindValue(':transNum', $transNum);
     } 
     else if(!$transNum && $price_min && $price_max && !$date_min && !$date_max)
     {
-        $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE Price BETWEEN :price_min AND :price_max ORDER BY Order_Date DESC');
-        $statement->bindValue(':price_min', $price_min);
-        $statement->bindValue(':price_max', $price_max);
+        //$statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE Price BETWEEN :price_min AND :price_max ORDER BY Order_Date DESC');
+        $statement = $pdo->prepare('SELECT transNum, Order_Date FROM customerorder ORDER BY Order_Date DESC');
+        $flag = 1;
+        //$statement->bindValue(':price_min', $price_min);
+        //$statement->bindValue(':price_max', $price_max);
     }
     else if(!$transNum && !$price_min && !$price_max && $date_min && $date_max)
     {
-        $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE Order_date BETWEEN :date_min AND :date_max ORDER BY Order_Date DESC');
+        //$statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE Order_date BETWEEN :date_min AND :date_max ORDER BY Order_Date DESC');
+        $statement = $pdo->prepare('SELECT transNum, Order_Date FROM customerorder WHERE Order_date BETWEEN :date_min AND :date_max ORDER BY Order_Date DESC');
         $statement->bindValue(':date_min', $date_min);
         $statement->bindValue(':date_max', $date_max);
     }
     else if(!$transNum && $price_min && $price_max && $date_min && $date_max)
     {
-        $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE Order_date BETWEEN :date_min AND :date_max AND Price BETWEEN :price_min AND :price_max ORDER BY Order_Date DESC');
+        //$statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder WHERE Order_date BETWEEN :date_min AND :date_max AND Price BETWEEN :price_min AND :price_max ORDER BY Order_Date DESC');
+        $statement = $pdo->prepare('SELECT transNum, Order_Date FROM customerorder WHERE Order_date BETWEEN :date_min AND :date_max ORDER BY Order_Date DESC');
+        $flag = 1;
         $statement->bindValue(':date_min', $date_min);
         $statement->bindValue(':date_max', $date_max);
-        $statement->bindValue(':price_min', $price_min);
-        $statement->bindValue(':price_max', $price_max);
+        //$statement->bindValue(':price_min', $price_min);
+        //$statement->bindValue(':price_max', $price_max);
     }
     else
     {
-        $statement = $pdo->prepare('SELECT transNum, Order_Date, Price FROM customerorder ORDER BY Order_Date DESC');
+        //Get this one to work then do the rest
+        $statement = $pdo->prepare('SELECT transNum, Order_Date FROM customerorder ORDER BY Order_Date DESC');
     }
 
     $statement->execute();
     $orders = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+    $pdo = null;        //to close out connection
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,16 +95,26 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($orders as $order): ?>
-                <tr>
-                    <td><?php echo $order['transNum']?></td>
-                    <td><?php echo $order['Order_Date']?></td>
-                    <td><?php echo $order['Price']?></td>
-                    <td>
-                    <a href="detail.php?transNum=<?php echo $order['transNum']?>" type="button" class="btn btn-sm btn-outline-primary">Check</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+            <?php foreach($orders as $order):
+                $num = getOrderTotal($order['transNum']);
+                if ((($price_min <= $num) and ($num <= $price_max)) or ($flag == 0) )
+                {
+                    echo '<tr>';
+                        echo '<td>'.$order['transNum'].'</td>';
+                        echo '<td>'.$order['Order_Date'].'</td>';
+                        echo '<td>';
+                        //print price
+                        echo $num;
+                        echo '</td>';
+                        echo '<td>';
+                        echo '<form action="/auto-parts/Administrator/detail.php" method="post">';
+                        echo "<input type='hidden' name='transNum' id='transNum' value='".$order['transNum']."'>";
+                        echo '<input type="submit" class="btn btn-sm btn-outline-primary" value="Check">';
+                        echo '</form>';
+                        echo '</td>';
+                    echo '</tr>';
+                }
+            endforeach; ?>
         </tbody>
     </table>
 </body>

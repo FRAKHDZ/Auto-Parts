@@ -27,7 +27,7 @@ $conn->set_charset("utf8");
 // zero out counter
 $counter = 0;
 // Collects data from "parts" table 
-$sql = "SELECT number, quant FROM partsordered WHERE authNum=".$_POST["authNumPass"];
+$sql = "SELECT number, quant FROM partsordered WHERE transNum=".$_POST["transNumPass"];
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// assign the number of rows to numR
@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
 //Check if date is in post
 if (isset($_POST['date'])) {
 	//if yes then update the customerOrder table
-	$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE authNum = ".$_POST["authNumPass"];
+	$sql = "UPDATE customerOrder SET dateShipped = '".date("Y/m/d")."' WHERE transNum = ".$_POST["transNumPass"];
 
 	if ($conn->query($sql) === FALSE) {
     	echo "Error updating record: " . $conn->error;
@@ -103,7 +103,7 @@ $conn->close();
 
 
 // print opening message
-echo "<h1>Parts in order ".$_POST["authNumPass"]."</h1>";
+echo "<h1>Parts in order ".$_POST["transNumPass"]."</h1>";
 // Lets print the table to the screen.
 // zero out counter again
 $counter = 0;
@@ -149,7 +149,7 @@ if (isset($_POST['date'])) {
 } else {
 	// add buttons to print shipping label.
 	echo "<form action='' method='post'>";
-		echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
+		echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'> <br>";
 		//submit button for packing list
 		echo "Date shipped: <input type='text' name='date' id='date' value='".date("Y/m/d")."'> <br>";
 		echo "<input type='submit' value='Mark order as Shipped'> <br>";
@@ -160,15 +160,15 @@ if (isset($_POST['date'])) {
 echo "<br><h2>Select what you would like to print:</h2>";
 
 // add buttons to print packing list.
-echo "<form action='/warehouseFolder/printFiles/packinglist.php' method='post'>";
-	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
+echo "<form action='/auto-parts/warehouseFolder/printFiles/packinglist.php' method='post'>";
+	echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'> <br>";
 	//submit button for packing list
 	echo "<input type='submit' value='Packing List'> <br>";
 echo "</form><br>";
 
 // add buttons to print invoice.
-echo "<form action='/warehouseFolder/printFiles/printInvoice.php' method='post'>";
-	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'>";
+echo "<form action='/auto-parts/warehouseFolder/printFiles/printInvoice.php' method='post'>";
+	echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'>";
 	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'>";
 	if (isset($_POST['date'])) {
 		echo "<input type='hidden' name='shipDate' id='shipDate' value='".$_POST['date']."'>";
@@ -178,8 +178,8 @@ echo "<form action='/warehouseFolder/printFiles/printInvoice.php' method='post'>
 echo "</form>";
 
 // add buttons to print shipping label.
-echo "<form action='/warehouseFolder/printFiles/printShippingLabel.php' method='post'>";
-	echo "<input type='hidden' name='authNumPass' id='authNumPass' value='".$_POST["authNumPass"]."'> <br>";
+echo "<form action='/auto-parts/warehouseFolder/printFiles/printShippingLabel.php' method='post'>";
+	echo "<input type='hidden' name='transNumPass' id='transNumPass' value='".$_POST["transNumPass"]."'> <br>";
 	//submit button for packing list
 	echo "<input type='hidden' name='shippingWeight' id='shippingWeight' value='".$totalW."'>";
 	echo "<input type='submit' value='Shipping Label'> <br>";
